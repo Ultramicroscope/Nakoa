@@ -1,0 +1,16 @@
+[
+{
+  "modid": "nakoa",
+  "name": "Nakoa",
+  "description": "Type a command, open a chest, then walk away!",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "https://github.com/Ultramicroscope/Nakoa",
+  "updateUrl": "",
+  "authorList": ["honeyfuggle"],
+  "credits": "",
+  "logoFile": "logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

@@ -1,0 +1,1 @@
+Go to your gold mine chest - Type the command /nakoa or /nak - Open the chest - Go AFK - When you come back, walk away from the chest.
