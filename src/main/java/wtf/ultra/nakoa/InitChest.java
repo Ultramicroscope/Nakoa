@@ -9,6 +9,7 @@ import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.inventory.ContainerChest;
+import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
@@ -44,18 +45,20 @@ public class InitChest implements ICommand {
                     Thread.sleep(5000);
                     if (player.openContainer instanceof ContainerChest) {
                         player.closeScreen();
+                        int slot;
+                        while ((slot = player.inventory.currentItem) != 1) player.inventory.changeCurrentItem(slot - 1);
                         say("beginning");
                         Thread.sleep(2000);
                         repeat: while(blockPos.distanceSq(player.getPosition()) <= 10) {
                             int failCount = -1;
                             while (!(player.openContainer instanceof ContainerChest)) {
-                                if (++failCount == 20) {
+                                if (++failCount == 4) {
                                     say("catastrophic failure");
                                     break repeat;
                                 }
                                 say("Opening");
                                 player.sendQueue.addToSendQueue(new C08PacketPlayerBlockPlacement(player.getPosition(), -1, player.getHeldItem(),-1,-1,-1));
-                                Thread.sleep((int)(Math.random() * 500 + 250));
+                                Thread.sleep((int)(Math.random() * 750 + 250));
                             }
                             say("Closing");
                             player.closeScreen();
