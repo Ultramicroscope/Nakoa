@@ -68,8 +68,8 @@ public class Nakoa {
                     if (mc.thePlayer.openContainer instanceof ContainerChest) {
                         // Close the chest.
                         mc.thePlayer.closeScreen();
-                        // Set the select hot-bar slot to slot 2. In Ventureland, slot 2 is never null.
-                        // When sending a PlayerBlockPlacement packet, it lost if the itemStack is null.
+                        // Set the selected hot-bar slot to slot 2. In Ventureland, slot 2 is never empty.
+                        // When sending a PlayerBlockPlacement packet, it is dropped if the itemStack is null.
                         mc.thePlayer.inventory.currentItem = 1;
                         System.out.println("[NAKOA]: STARTING");
                         nakoaState = 2;
@@ -98,8 +98,8 @@ public class Nakoa {
                             handlingGui = true;
                             System.out.println("[NAKOA]: OPENING");
                             // Sending a PlayerBlockPlacement packet to the client's Net Handler queue.
-                            // The face and cursor positions params are -1 because the server ignores them anyway.
-                            // Technically the position and held item are also ignored.
+                            // The face and cursor position parameters are -1 because the server ignores them anyway.
+                            // Technically the player's position and held item are also ignored.
                             mc.thePlayer.sendQueue.addToSendQueue(new C08PacketPlayerBlockPlacement(mc.thePlayer.getPosition(), -1, mc.thePlayer.getHeldItem(),-1,-1,-1));
                             nakoaState = 3;
                         } else {
@@ -118,7 +118,7 @@ public class Nakoa {
             }
             case 3: {
                 if (tick == stageTwoTick) {
-                    // Check if the chest successfully opened from the packet sent in the previous stage.
+                    // Check if the chest successfully opened from the packet queued in the previous stage.
                     if (mc.thePlayer.openContainer instanceof ContainerChest) {
                         System.out.println("[NAKOA]: CLOSING");
                         // Close the chest.
