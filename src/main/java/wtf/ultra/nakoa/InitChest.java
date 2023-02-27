@@ -18,6 +18,31 @@ public class InitChest implements ICommand {
     private BlockPos blockPos;
     private boolean active = false;
 
+    public void processCommand(ICommandSender icommandsender, String[] args) {
+        // Store the coordinates of the block that the player is looking at.
+        blockPos = mc.objectMouseOver.getBlockPos();
+        // Get the block from the block state of the coordinates and check if it is a chest.
+        if (mc.theWorld.getBlockState(blockPos).getBlock() instanceof BlockChest) {
+            // Activate the mod for execution in the PlayerTick handler.
+            active = true;
+        } else {
+            // Clear the block position being stored and inform the player of their failure.
+            blockPos = null;
+            mc.thePlayer.addChatMessage(new ChatComponentText("dis ain't no ches fr"));
+        }
+    }
+
+    /* End execution of the mod by setting active to false and clear the block position being stored. */
+    public void deactivate() {
+        active = false;
+        blockPos = null;
+    }
+
+    /* Returns the coordinates of the chest the player initialize the mod with. */
+    public BlockPos chestPos() {
+        return blockPos;
+    }
+
     public String getCommandName() {
         return "nakoa";
     }
@@ -30,13 +55,6 @@ public class InitChest implements ICommand {
         List<String> commandAliases = new ArrayList<>();
         commandAliases.add("nak");
         return commandAliases;
-    }
-
-    public void processCommand(ICommandSender icommandsender, String[] args) {
-        blockPos = mc.objectMouseOver.getBlockPos();
-        if (mc.theWorld.getBlockState(blockPos).getBlock() instanceof BlockChest) {
-            active = true;
-        } else mc.thePlayer.addChatMessage(new ChatComponentText("dis ain't no ches fr"));
     }
 
     public boolean canCommandSenderUseCommand(ICommandSender icommandsender){
@@ -57,13 +75,5 @@ public class InitChest implements ICommand {
 
     public boolean isActive() {
         return active;
-    }
-
-    public void deactivate() {
-        active = false;
-    }
-
-    public BlockPos chestPos() {
-        return blockPos;
     }
 }
