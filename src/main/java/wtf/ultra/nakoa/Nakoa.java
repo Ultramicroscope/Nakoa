@@ -127,8 +127,7 @@ public class Nakoa {
                         // Reset the fail counter of the previous stage because it was successful.
                         failCount = 0;
                         // Set the counter to wait awhile before opening the chest again.
-                        //tickBuffer = 36000 + (int)(Math.random() * 12000);
-                        tickBuffer = 36 + (int)(Math.random() * 12);
+                        tickBuffer = 36000 + (int)(Math.random() * 12000);
                     } else {
                         // If the chest failed to open, wait a bit then try again.
                         tickBuffer = 5 + (int)(Math.random() * 15);
