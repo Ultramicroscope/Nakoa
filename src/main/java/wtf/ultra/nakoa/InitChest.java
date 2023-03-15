@@ -9,9 +9,10 @@ import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.MovingObjectPosition;
 
 import javax.annotation.Nonnull;
+
+import static net.minecraft.util.MovingObjectPosition.MovingObjectType.BLOCK;
 
 public class InitChest implements ICommand {
 
@@ -23,8 +24,7 @@ public class InitChest implements ICommand {
         // Store the coordinates of the block that the player is looking at.
         blockPos = mc.objectMouseOver.getBlockPos();
         // Get the block from the block state of the coordinates and check if it is a chest.
-        if (mc.objectMouseOver.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK
-            && mc.theWorld.getBlockState(blockPos).getBlock() instanceof BlockChest) {
+        if (mc.objectMouseOver.typeOfHit == BLOCK && mc.theWorld.getBlockState(blockPos).getBlock() instanceof BlockChest) {
             // Activate the mod for execution in the PlayerTick handler.
             active = true;
         } else {
