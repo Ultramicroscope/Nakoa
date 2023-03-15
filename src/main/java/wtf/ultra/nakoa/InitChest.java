@@ -40,11 +40,6 @@ public class InitChest implements ICommand {
         blockPos = null;
     }
 
-    /* Returns the coordinates of the chest the player initialized the mod with. */
-    public BlockPos chestPos() {
-        return blockPos;
-    }
-
     public String getCommandName() {
         return "nakoa";
     }
